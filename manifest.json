@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+
+  "name": "Nicoplay for Google Chrome",
+  "description": "play music from nicovideo.jp, update hourly.",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "nico.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_security_policy":
+    "script-src 'self' 'unsafe-eval' https://ajax.cdnjs.com/ https://ajax.googleapis.com/; object-src 'self'"
+}
