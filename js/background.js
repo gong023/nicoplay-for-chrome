@@ -1,19 +1,20 @@
 var AudioModel = Backbone.Model.extend({
   defaults: {
-    "audio": new Audio(),
-    "src": "",
-    "play": false
+    "audio": new Audio()
   },
   initialize: function() {
     this.on("change:src", this.changeSrc);
-    this.on("change:play", this.togglePlaying);
+    this.on("change:playing", this.togglePlaying);
+    this.on("invalid", function(model, error) {
+      console.log('[validate error] ' + error);
+    });
   },
   validate: function(attrs) {
     var errs = [];
-    if (attrs.src.length == 0) {
+    if (_.has(attrs, "src") && attrs.src.length == 0) {
       errs.push('audio src is empty');
     }
-    if (typeof attrs.playing !== 'boolean') {
+    if (_.has(attrs, "playing") && typeof attrs.playing !== 'boolean') {
       errs.push('playing must be boolean');
     }
 
@@ -26,9 +27,7 @@ var AudioModel = Backbone.Model.extend({
   },
   togglePlaying: function() {
     var audio = this.get("audio");
-    this.get("play") === true ? audio.play() : audio.pause();
-    var playing = ! this.get("play");
-    this.set({"play": playing}, {silent: true});
+    this.get("playing") === true ? audio.pause() : audio.play();
   }
 });
 
@@ -37,12 +36,23 @@ var AudioView = Backbone.View.extend({
     chrome.extension.onMessage.addListener($.proxy(this.getMessage, this));
   },
   getMessage: function() {
-    this.model.set(arguments[0], {
-//      validate: true,
-//      error: function(model, error) {
-//        console.log('[validate error] ' + error);
-//      }
-    });
+    var a = arguments[0];
+    if (_.isObject(a)) {
+      var method = _.keys(a)[0];
+      var arg = _.values(a)[0];
+    } else {
+      var method = a;
+    }
+
+    switch (method) {
+      case 'setSrc':
+        this.model.set({'src': _.first(arg)}, {validate: true});
+        break;
+      case 'setPlay':
+        var is_playing = ! this.model.get("audio").paused;
+        this.model.set({'playing': is_playing}, {validate: true});
+        break;
+    }
   }
 });
 
