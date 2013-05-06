@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+  <title>Nicoplay for Chrome Extention</title>
+  <style>
+    body {
+      min-width: 400px;
+      overflow-x: hidden;
+    }
+    img {
+      margin: 5px;
+      border: 2px solid black;
+      vertical-align: middle;
+      width: 75px;
+      height: 75px;
+    }
+  </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+  <div id="playlist">
+    <script type="text/template" id="list">
+      <% _.each(list, function(item) { %>
+        <%= item.title %>
+        <button class="select">play</button>
+      <% }); %>
+    </script>
+  </div>
+  <div id="control">
+    <script type="text/template" id="parts">
+      <span id="back">back</span>
+      <span id="play" value="<% src %>">play</span>
+    </script>
+  </div>
+  <script data-main="../js/frontend_main.js" src="../js/libs/require/require.js"></script>
+</body>
+</html>
