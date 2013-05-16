@@ -8,13 +8,14 @@ require.config({
 });
 
 require(
-  ["views/popup", "views/popup/playlist", "views/popup/control"],
-  function(PopupView, ListView, ControlView) {
+  ["jquery", "underscore", "backbone",
+    "views/popup", "views/popup/playlist", "views/popup/control"],
+  function($, _, Backbone, PopupView, ListView, ControlView) {
     var popup_view = new PopupView();
     var list_view = new ListView();
     var control_view = new ControlView();
-    popup_view.render();
     list_view.render();
     control_view.render();
+    popup_view.render();
   }
 );

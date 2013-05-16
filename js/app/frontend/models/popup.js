@@ -7,7 +7,10 @@ define(
       var obj = Backbone.Model.extend({
         defaults: {
           "view": "list",
+          "playing_index": 0,
           "domain": "http://gong023.com/nicoplay/public/audio/all/"
+        },
+        initialize: function() {
         }
       });
 

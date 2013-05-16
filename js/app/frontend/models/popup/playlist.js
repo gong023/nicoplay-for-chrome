@@ -4,7 +4,7 @@ define(
 
     var ListModel = PopupModel().getObject().extend({
       defaults: {
-        "index": 0,
+        "index": 0,// 消す
         "list": {
           0: {
             "ctime": "2013-04-04",
@@ -12,16 +12,11 @@ define(
             "video_id": "sm20517586"
           },
           1: {
-            "ctime": "2013-04-03",
-            "title": "❤「魔法少女幸福論」歌ってみた　ver.lino ❤",
-            "video_id": "sm20517586"
+            "ctime": "2013-05-14",
+            "title": "ミサカサーキュレーション",
+            "video_id": "sm18392719"
           }
         }
-      },
-      getSrc: function() {
-        var domain = "http://gong023.com/nicoplay/public/audio/all/";
-        var list = this.get("list")[this.get("index")];
-        console.log(domain + list.ctime + "/" + list.video_id + ".mp3");
       }
     });
 

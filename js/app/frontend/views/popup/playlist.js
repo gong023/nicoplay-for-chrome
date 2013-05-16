@@ -3,18 +3,22 @@ define(
   function(PopupView, PopupModel, ListModel, ControlModel) {
 
     var ListView = PopupView.extend({
-      listModel: new ListModel(),
-      controlModel: new ControlModel(),
+      model: new ListModel(),
+      control_model: new ControlModel(),
       el: $('#playlist'),
+      initialize: function() {
+        // do nothing.
+      },
       events: {
         "click .select": "showControl"
       },
       render: function() {
-        $(this.el).html(_.template($("#list").html(), {list: this.listModel.get("list")}));
+        $(this.el).html(_.template($("#list").html(), {list: this.model.get("list")}));
       },
-      showControl: function() {
-        this.popupModel.set("view", "control");
-        this.controlModel.play();
+      showControl: function(ev) {
+        this.popup_model.set("view", "control");
+        this.control_model.play();
+        //this.popup_model.set("playing_index", $(ev.target).val());
       }
     });
 

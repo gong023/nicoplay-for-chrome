@@ -18,20 +18,22 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-  <div id="playlist">
-    <script type="text/template" id="list">
-      <% _.each(list, function(item) { %>
-        <%= item.title %>
-        <button class="select">play</button>
-      <% }); %>
-    </script>
+  <div id="container">
+    <div id="playlist">
+      <script type="text/template" id="list">
+        <% for (var item in list) { %>
+          <%= list[item].title %>
+          <button class="select" value="<%= item %>">play</button>
+        <% }; %>
+      </script>
+    </div>
+    <div id="control">
+      <script type="text/template" id="parts">
+        <span id="back">back</span>
+        <san id="play" value="<% src %>">play</span>
+      </script>
+    </div>
   </div>
-  <div id="control">
-    <script type="text/template" id="parts">
-      <span id="back">back</span>
-      <span id="play" value="<% src %>">play</span>
-    </script>
-  </div>
-  <script data-main="../js/frontend_main.js" src="../js/libs/require/require.js"></script>
+  <script data-main="../js/app/frontend_main.js" src="../js/libs/require/require.js"></script>
 </body>
 </html>

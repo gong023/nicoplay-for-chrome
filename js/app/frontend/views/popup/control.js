@@ -3,8 +3,12 @@ define(
   function(PopupView, PopupModel, ControlModel) {
 
     var ControlView = PopupView.extend({
-      controlModel: new ControlModel(),
+      model: new ControlModel(),
       el: $("#control"),
+      initialize: function() {
+        //PopupModel().getInstance().on("change:playing_index", this.model.play);
+        this.popup_model.on("change:playing_index", this.model.play);
+      },
       events: {
         "click #back": "doBack",
         "click #play": "doPlay"
@@ -13,10 +17,10 @@ define(
         $(this.el).html(_.template($("#parts").html(), {src: "hoge"}));
       },
       doBack: function() {
-        this.popupModel.set("view", "list");
+        this.popup_model.set("view", "list");
       },
       doPlay: function() {
-        this.controlModel.play();
+        this.popup_model.play();
       }
     });
 
