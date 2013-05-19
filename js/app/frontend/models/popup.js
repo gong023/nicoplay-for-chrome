@@ -2,20 +2,19 @@ define(
   ["jquery", "underscore", "backbone"],
   function($, _, Backbone) {
 
+    var instance = false;
+
     var PopupModel = function() {
-      var instance = false;
       var obj = Backbone.Model.extend({
         defaults: {
           "view": "list",
           "playing_index": 0,
           "domain": "http://gong023.com/nicoplay/public/audio/all/"
-        },
-        initialize: function() {
         }
       });
 
       return {
-        getObject: function() {
+        getObj: function() {
           return obj;
         },
         getInstance: function() {

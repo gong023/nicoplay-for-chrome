@@ -6,7 +6,6 @@ define(
       model: new ControlModel(),
       el: $("#control"),
       initialize: function() {
-        //PopupModel().getInstance().on("change:playing_index", this.model.play);
         this.popup_model.on("change:playing_index", this.model.play);
       },
       events: {

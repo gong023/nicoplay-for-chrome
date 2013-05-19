@@ -2,15 +2,17 @@ define(
   ["models/popup", "models/popup/playlist"],
   function(PopupModel, ListModel) {
 
-    var ControlModel = PopupModel().getObject().extend({
+    var ControlModel = PopupModel().getObj().extend({
       list_model: new ListModel(), //XXX: fix me
       initialize: function() {
         _.bindAll(this, "play", "sendMessage");
+        this.parent = PopupModel().getInstance();
       },
       play: function() {
-        var list = this.list_model.get("list")[this.list_model.get("index")];
+        var index = this.parent.get("playing_index");
+        console.log(index);
+        var list = this.list_model.get("list")[index];
         var src = this.get("domain") + list.ctime + "/" + list.video_id + ".mp3";
-        console.log(src);
         this.sendMessage(["play", src]);
       },
       sendMessage: function(arg) {

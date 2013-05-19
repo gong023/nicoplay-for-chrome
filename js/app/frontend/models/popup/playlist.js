@@ -2,7 +2,7 @@ define(
   ["models/popup"],
   function(PopupModel) {
 
-    var ListModel = PopupModel().getObject().extend({
+    var ListModel = PopupModel().getObj().extend({
       defaults: {
         "index": 0,// 消す
         "list": {
@@ -17,6 +17,9 @@ define(
             "video_id": "sm18392719"
           }
         }
+      },
+      initialize: function() {
+        this.parent = PopupModel().getInstance();
       }
     });
 

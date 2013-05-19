@@ -17,8 +17,7 @@ define(
       },
       showControl: function(ev) {
         this.popup_model.set("view", "control");
-        this.control_model.play();
-        //this.popup_model.set("playing_index", $(ev.target).val());
+        this.popup_model.set("playing_index", $(ev.target).val());
       }
     });
 
