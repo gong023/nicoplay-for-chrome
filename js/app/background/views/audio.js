@@ -14,10 +14,10 @@ define(
         switch (method) {
           case 'play':
             this.model.set({'src': _.first(args)}, {validate: true});
+            this.model.play();
             break;
           case 'togglePlay':
-            //var is_playing = ! this.model.get("audio").paused;
-            //this.model.set({'playing': is_playing}, {validate: true});
+            this.model.togglePlay();
             break;
         }
       }

@@ -4,10 +4,8 @@ define(
 
     var ListView = PopupView.extend({
       model: new ListModel(),
-      control_model: new ControlModel(),
       el: $('#playlist'),
       initialize: function() {
-        // do nothing.
       },
       events: {
         "click .select": "showControl"
@@ -16,8 +14,8 @@ define(
         $(this.el).html(_.template($("#list").html(), {list: this.model.get("list")}));
       },
       showControl: function(ev) {
-        this.popup_model.set("view", "control");
-        this.popup_model.set("playing_index", $(ev.target).val());
+        this.popupModel.set("view", "control");
+        this.popupModel.set({"playing_index": $(ev.target).val()});
       }
     });
 

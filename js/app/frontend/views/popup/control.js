@@ -6,20 +6,29 @@ define(
       model: new ControlModel(),
       el: $("#control"),
       initialize: function() {
-        this.popup_model.on("change:playing_index", this.model.play);
+        this.popupModel.on("change:playing_index", this.model.play);
       },
       events: {
         "click #back": "doBack",
-        "click #play": "doPlay"
+        "click #play": "doPlay",
+        "click #next": "doNext",
+        "click #prev": "doPrev"
       },
       render: function() {
-        $(this.el).html(_.template($("#parts").html(), {src: "hoge"}));
       },
       doBack: function() {
-        this.popup_model.set("view", "list");
+        this.popupModel.set("view", "list");
       },
       doPlay: function() {
-        this.popup_model.play();
+        this.model.togglePlay();
+      },
+      doNext: function() {
+        var index = parseInt(this.popupModel.get("playing_index")) + 1;
+        this.popupModel.set("playing_index", index)
+      },
+      doPrev: function() {
+        var index = parseInt(this.popupModel.get("playing_index")) - 1;
+        this.popupModel.set("playing_index", index)
       }
     });
 

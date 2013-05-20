@@ -3,17 +3,17 @@ define(
   function($, _, Backbone, PopupModel) {
 
     var PopupView = Backbone.View.extend({
-      // 手は尽くしたが、これしかないかも。
-      // modelにすると子供に上書きされてしまうし、PopupViewのcontext維持も難しい
-      popup_model: PopupModel().getInstance(),
+      // there may be no way the only termed model.
+      // difficult to keep context.fix me.
+      popupModel: PopupModel().getInstance(),
       initialize: function() {
-        this.popup_model.on("change:view", this.switchView, this);
+        this.popupModel.on("change:view", this.switchView, this);
       },
       render: function() {
         $("#control").hide();
       },
       switchView: function() {
-        switch (this.popup_model.get("view")) {
+        switch (this.popupModel.get("view")) {
           case "list":
             $("#control").hide("fast");
             $("#playlist").show("fast");

@@ -4,7 +4,6 @@ define(
 
     var ListModel = PopupModel().getObj().extend({
       defaults: {
-        "index": 0,// 消す
         "list": {
           0: {
             "ctime": "2013-04-04",
@@ -20,6 +19,11 @@ define(
       },
       initialize: function() {
         this.parent = PopupModel().getInstance();
+      },
+      getLength: function() {
+        var length = 0;
+        for (var name in this.get("list")) length++;
+        return length;
       }
     });
 
