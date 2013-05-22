@@ -28,10 +28,12 @@
       </script>
     </div>
     <div id="control">
-      <span id="back">back</span>
-      <span id="prev">prev</span>
-      <span id="play">play</span>
-      <span id="next">next</span>
+      <script type="text/template" id="parts">
+        <span id="back">back</span>
+        <span id="prev">prev</span>
+        <span id="play"><%= togglePlay %></span>
+        <span id="next">next</span>
+      </script>
     </div>
   </div>
   <script data-main="../js/app/frontend_main.js" src="../js/libs/require/require.js"></script>

@@ -25,6 +25,9 @@ define(
       play: function() {
         this.get("audio").play();
       },
+      isPaused: function() {
+        return this.get("audio").paused;
+      },
       changeSrc: function() {
         var audio = this.get("audio");
         audio.src = this.get("src");

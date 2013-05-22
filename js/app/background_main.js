@@ -8,8 +8,30 @@ require.config({
 });
 
 require(
-  ["views/audio"],
-  function(AudioView) {
-    new AudioView();
+  ["models/audio"],
+  function(AudioModel) {
+    chrome.extension.onConnect.addListener(function(port) {
+      port.onMessage.addListener(function(req) {
+        var method = _.first(req);
+        var args = _.rest(req);
+        var model = new AudioModel();
+
+        switch(method) {
+          case 'play':
+            model.set({'src': _.first(args)}, {validate: true});
+            model.play();
+            break;
+          case 'togglePlay':
+            model.togglePlay();
+            break;
+          case 'isPaused':
+            port.postMessage(["isPaused", model.isPaused()]);
+          break;
+          default:
+            console.warn("unknown message.");
+          break;
+        }
+      })
+    });
   }
 );
