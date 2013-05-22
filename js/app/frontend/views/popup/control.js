@@ -25,6 +25,7 @@ define(
       },
       doPlay: function() {
         this.model.togglePlay();
+        this.model.isPaused();
         //var toggleText = (this.model.isPaused()) ? "pause" : "play";
         //$(this.el).html(_.template($("#list").html(), {togglePlay: toggleText}))
       },

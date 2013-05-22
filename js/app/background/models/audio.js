@@ -7,6 +7,9 @@ define(
         "audio": new Audio()
       },
       initialize: function() {
+        var audio = this.get("audio").setAttribute('id', 'bkAudio');
+        $("body").append(audio);
+        this.set("audio", audio);
         this.on("change:src", this.changeSrc);
         this.on("invalid", function(model, error) {
           console.warn('[validate error] ' + error);

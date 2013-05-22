@@ -29,7 +29,7 @@ define(
         this.port.postMessage(["togglePlay"]);
       },
       isPaused: function() {
-        // getBackgroundPage
+        return chrome.extension.getBackgroundPage().$("#bkAudio")[0].paused;
       },
       onMessage: function() {
         var method = _.first(arguments[0]);
