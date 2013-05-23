@@ -14,12 +14,11 @@ require(
       port.onMessage.addListener(function(req) {
         var method = _.first(req);
         var args = _.rest(req);
-        var model = new AudioModel();
+        var model = AudioModel;
 
         switch(method) {
           case 'play':
             model.set({'src': _.first(args)}, {validate: true});
-            model.play();
             break;
           case 'togglePlay':
             model.togglePlay();

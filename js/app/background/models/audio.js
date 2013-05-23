@@ -2,14 +2,14 @@ define(
  ["jquery", "underscore", "backbone"],
   function($, _, Backbone) {
 
-    var AudioModel = Backbone.Model.extend({
-      defaults: {
-        "audio": new Audio()
-      },
+    // singleton
+    return  new (Backbone.Model.extend({
       initialize: function() {
-        var audio = this.get("audio").setAttribute('id', 'bkAudio');
+        var audio = new Audio();
+        audio.setAttribute('id', 'bkAudio');
         $("body").append(audio);
         this.set("audio", audio);
+
         this.on("change:src", this.changeSrc);
         this.on("invalid", function(model, error) {
           console.warn('[validate error] ' + error);
@@ -25,23 +25,16 @@ define(
         }
         if (errs.length > 0) return errs;
       },
-      play: function() {
-        this.get("audio").play();
-      },
-      isPaused: function() {
-        return this.get("audio").paused;
-      },
       changeSrc: function() {
         var audio = this.get("audio");
         audio.src = this.get("src");
         this.set("audio", audio);
+        audio.play();
       },
       togglePlay: function() {
         var audio = this.get("audio");
         audio.paused === true ? audio.play() : audio.pause();
       }
-    });
-
-    return AudioModel;
+    }));
   }
 );
