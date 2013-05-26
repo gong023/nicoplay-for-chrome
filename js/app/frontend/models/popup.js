@@ -9,6 +9,7 @@ define(
         defaults: {
           "view": "list",
           "playing_index": 0,
+          "is_shuffle": false,
           "domain": "http://gong023.com/nicoplay/public/audio/all/"
         },
         getBkAudio: function() {

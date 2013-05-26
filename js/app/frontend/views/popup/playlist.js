@@ -6,6 +6,7 @@ define(
       model: new ListModel(),
       el: $('#playlist'),
       initialize: function() {
+        this.popupModel.on("change:is_shuffle", this.model.shuffle);
       },
       events: {
         "click .select": "showControl"

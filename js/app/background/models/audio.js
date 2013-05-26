@@ -28,7 +28,6 @@ define(
       changeSrc: function() {
         var audio = this.get("audio");
         audio.src = this.get("src");
-        this.set("audio", audio);
         audio.play();
       },
       togglePlay: function() {

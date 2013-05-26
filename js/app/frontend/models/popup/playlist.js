@@ -14,16 +14,38 @@ define(
             "ctime": "2013-05-14",
             "title": "ミサカサーキュレーション",
             "video_id": "sm18392719"
+          },
+          2: {
+            "ctime": "2013-05-24",
+            "title": "夕立のりぼんを全力で歌ってみた【レミュー】",
+            "video_id": "sm20939442"
           }
         }
       },
       initialize: function() {
+        _.bindAll(this, "getLength", "shuffle");
         this.parent = PopupModel().getInstance();
+        this.set("list_default", _.clone(this.get("list")));//XXX:fixme
       },
       getLength: function() {
         var length = 0;
         for (var name in this.get("list")) length++;
         return length;
+      },
+      shuffle: function() {
+        if (this.parent.get("is_shuffle")) {
+          var list = this.get("list");
+          var length = this.getLength();
+          while(length--) {
+            var rand = Math.floor(Math.random() * (length + 1));
+            if (length == rand) continue;
+            var tmp = list[length];
+            list[length] = list[rand];
+            list[rand] = tmp;
+          }
+        } else {
+          this.set("list", _.clone(this.get("list_default")));//XXX:fixme
+        }
       }
     });
 
