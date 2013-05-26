@@ -10,6 +10,9 @@ define(
           "view": "list",
           "playing_index": 0,
           "domain": "http://gong023.com/nicoplay/public/audio/all/"
+        },
+        getBkAudio: function() {
+          return chrome.extension.getBackgroundPage().$("#bkAudio")[0];
         }
       });
 

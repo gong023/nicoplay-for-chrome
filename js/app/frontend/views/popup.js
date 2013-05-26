@@ -10,7 +10,11 @@ define(
         this.popupModel.on("change:view", this.switchView, this);
       },
       render: function() {
-        $("#control").hide();
+        if (this.popupModel.getBkAudio().paused) {
+          $("#control").hide();
+        } else {
+          $("#playlist").hide();
+        }
       },
       switchView: function() {
         switch (this.popupModel.get("view")) {

@@ -6,8 +6,13 @@ define(
       model: new ControlModel(),
       el: $("#control"),
       initialize: function() {
+        _.bindAll(this, "doBack", "doPlay", "doNext", "doPrev", "onPlay", "onPause");
+
         this.popupModel.on("change:playing_index", this.model.play);
-        //this.popupModel.on("change:view", this.render);
+
+        var bkAudio = this.popupModel.getBkAudio();
+        $(bkAudio).on("play", this.onPlay);
+        $(bkAudio).on("pause", this.onPause);
       },
       events: {
         "click #back": "doBack",
@@ -16,18 +21,12 @@ define(
         "click #prev": "doPrev"
       },
       render: function() {
-        //var toggleText = (this.model.isPaused()) ? "pause" : "play";
-        var toggleText = 'pause';
-        $(this.el).html(_.template($("#parts").html(), {togglePlay: toggleText}))
       },
       doBack: function() {
         this.popupModel.set("view", "list");
       },
       doPlay: function() {
         this.model.togglePlay();
-        this.model.isPaused();
-        //var toggleText = (this.model.isPaused()) ? "pause" : "play";
-        //$(this.el).html(_.template($("#list").html(), {togglePlay: toggleText}))
       },
       doNext: function() {
         var index = parseInt(this.popupModel.get("playing_index")) + 1;
@@ -36,6 +35,12 @@ define(
       doPrev: function() {
         var index = parseInt(this.popupModel.get("playing_index")) - 1;
         this.popupModel.set("playing_index", index)
+      },
+      onPlay: function() {
+        $(this.el).html(_.template($("#parts").html(), {togglePlay: "pause"}));
+      },
+      onPause: function() {
+        $(this.el).html(_.template($("#parts").html(), {togglePlay: "play"}));
       }
     });
 

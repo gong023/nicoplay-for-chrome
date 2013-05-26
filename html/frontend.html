@@ -19,22 +19,21 @@
 </head>
 <body>
   <div id="container">
+    <script type="text/template" id="list">
+      <% for (var item in list) { %>
+        <%= list[item].title %>
+        <button class="select" value="<%= item %>">play</button>
+      <% }; %>
+    </script>
     <div id="playlist">
-      <script type="text/template" id="list">
-        <% for (var item in list) { %>
-          <%= list[item].title %>
-          <button class="select" value="<%= item %>">play</button>
-        <% }; %>
-      </script>
     </div>
-    <div id="control">
-      <script type="text/template" id="parts">
-        <span id="back">back</span>
-        <span id="prev">prev</span>
-        <span id="play"><%= togglePlay %></span>
-        <span id="next">next</span>
-      </script>
-    </div>
+    <script type="text/template" id="parts">
+      <span id="back">back</span>
+      <span id="prev">prev</span>
+      <span id="play"><%= togglePlay %></span>
+      <span id="next">next</span>
+    </script>
+    <div id="control"></div>
   </div>
   <script data-main="../js/app/frontend_main.js" src="../js/libs/require/require.js"></script>
 </body>
