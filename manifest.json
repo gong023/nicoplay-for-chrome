@@ -13,5 +13,8 @@
     "page": "html/background.html"
   },
   "content_security_policy":
-    "script-src 'self' 'unsafe-eval' https://ajax.cdnjs.com/ https://ajax.googleapis.com/; object-src 'self'"
+    "script-src 'self' 'unsafe-eval' https://ajax.cdnjs.com/ https://ajax.googleapis.com/; object-src 'self'",
+  "permissions": [
+    "http://gong023.com/"
+  ]
 }
