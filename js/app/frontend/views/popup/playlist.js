@@ -3,7 +3,7 @@ define(
   function(PopupView, PopupModel, ListModel, ControlModel) {
 
     var ListView = PopupView.extend({
-      model: new ListModel(),
+      model: ListModel,
       el: $('#playlist'),
       initialize: function() {
         _.bindAll(this, "render", "showControl");
@@ -14,10 +14,12 @@ define(
       },
       render: function() {
         this.model.fetch({
-          success: $.proxy(function(data) {
-            $(this.el).html(_.template($("#list").html(), {list: data.attributes.mock.list}));
+          success: $.proxy(function(model) {
+            var list = (this.model.get("use_mock")) ? model.attributes.mock : model.toJSON();
+            $(this.el).html(_.template($("#list").html(), {list: list}));
 
-            this.model.set("list_default", _.clone(data.attributes.mock.list));
+            this.model.set('list', list);
+            this.model.set("list_default", _.clone(list));
           }, this),
           error: function(error) {
             alert("failed to get resource.");

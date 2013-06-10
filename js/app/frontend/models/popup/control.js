@@ -3,7 +3,7 @@ define(
   function(PopupModel, ListModel) {
 
     var ControlModel = PopupModel().getObj().extend({
-      listModel: new ListModel(), //XXX: fix me
+      listModel: ListModel, //XXX: fix me
       initialize: function() {
         _.bindAll(this, "play", "togglePlay", "isPaused");
         this.parent = PopupModel().getInstance();
@@ -13,6 +13,10 @@ define(
       play: function() {
         var index = this.parent.get("playing_index");
         var list = this.listModel.get("list");
+        if (! list) {
+          alert('there is no list.');
+          return;
+        }
         var listLength = this.listModel.getLength();
 
         if (index < 0) {

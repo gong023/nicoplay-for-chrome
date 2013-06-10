@@ -2,36 +2,35 @@ define(
   ["models/popup", "jquery_mockjax"],
   function(PopupModel) {
 
-    var ListModel = PopupModel().getObj().extend({
+    // singleton
+    return new (PopupModel().getObj().extend({
       url: 'http://gong023.com/list',
       defaults: {
         use_mock: true,
         mock: {
-          list: {
-            0: {
-              "ctime": "2013-04-04",
-              "title": "MAD　這いよれ!カーズさんW-故意はカーズの隷也-",
-              "video_id": "sm20517586"
-            },
-            1: {
-              "ctime": "2013-05-14",
-              "title": "ミサカサーキュレーション",
-              "video_id": "sm18392719"
-            },
-            2: {
-              "ctime": "2013-05-24",
-              "title": "夕立のりぼんを全力で歌ってみた【レミュー】",
-              "video_id": "sm20939442"
-            }
+          0: {
+            "ctime": "2013-04-04",
+            "title": "MAD 這いよれ!カーズさんW-故意はカーズの隷也-",
+            "video_id": "sm20517586"
+          },
+          1: {
+            "ctime": "2013-05-14",
+            "title": "ミサカサーキュレーション",
+            "video_id": "sm18392719"
+          },
+          2: {
+            "ctime": "2013-05-24",
+            "title": "夕立のりぼんを全力で歌ってみた【レミュー】",
+            "video_id": "sm20939442"
           }
         }
       },
       initialize: function() {
-        if (this.get("use_mock") == true) {
+        if (this.get("use_mock")) {
           var mock = this.get("mock_list");
           $.mockjax({
             url: 'http://gong023.com/list',
-            responseText: mock 
+            responseText: mock
           });
         }
         _.bindAll(this, "getLength", "shuffle");
@@ -57,8 +56,6 @@ define(
           this.set("list", _.clone(this.get("list_default")));//XXX:fixme
         }
       }
-    });
-
-    return ListModel;
+    }));
   }
 );
