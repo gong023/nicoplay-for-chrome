@@ -2,11 +2,11 @@ define(
   ["models/popup", "models/popup/playlist"],
   function(PopupModel, ListModel) {
 
-    var ControlModel = PopupModel().getObj().extend({
-      listModel: ListModel, //XXX: fix me
+    var ControlModel = Backbone.Model.extend({
+      listModel: new ListModel(), //XXX: fix me
       initialize: function() {
         _.bindAll(this, "play", "togglePlay", "isPaused");
-        this.parent = PopupModel().getInstance();
+        this.parent = new PopupModel();
         this.port = chrome.extension.connect();
         this.port.onMessage.addListener($.proxy(this.onMessage, this));
       },
@@ -27,7 +27,7 @@ define(
         this.parent.set({"playing_index": index}, {silent: true});
 
         var selected = list[index];
-        var src = this.get("domain") + selected.ctime + "/" + selected.video_id + ".mp3";
+        var src = this.parent.get("domain") + selected.ctime + "/" + selected.video_id + ".mp3";
         //src = 'http://taira-komori.jpn.org/sound/game01/Surprise.mp3';
         //src = 'http://taira-komori.jpn.org/sound/game01/button01a.mp3';
         this.port.postMessage(["play", src]);

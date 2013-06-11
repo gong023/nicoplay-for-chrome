@@ -3,21 +3,19 @@ define(
   function($, _, Backbone, PopupModel) {
 
     var PopupView = Backbone.View.extend({
-      // there may be no way the only termed model.
-      // difficult to keep context.fix me.
-      popupModel: PopupModel().getInstance(),
+      model: new PopupModel(),
       initialize: function() {
-        this.popupModel.on("change:view", this.switchView, this);
+        this.model.on("change:view", this.switchView, this);
       },
       render: function() {
-        if (this.popupModel.getBkAudio().paused) {
+        if (this.model.getBkAudio().paused) {
           $("#control").hide();
         } else {
           $("#playlist").hide();
         }
       },
       switchView: function() {
-        switch (this.popupModel.get("view")) {
+        switch (this.model.get("view")) {
           case "list":
             $("#control").hide("fast");
             $("#playlist").show("fast");

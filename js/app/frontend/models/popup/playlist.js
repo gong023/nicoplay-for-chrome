@@ -2,8 +2,7 @@ define(
   ["models/popup", "jquery_mockjax"],
   function(PopupModel) {
 
-    // singleton
-    return new (PopupModel().getObj().extend({
+    var ListModel = Backbone.Model.extend({
       url: 'http://gong023.com/list',
       defaults: {
         use_mock: true,
@@ -25,6 +24,13 @@ define(
           }
         }
       },
+      constructor: function() {
+        if (! ListModel.instance) {
+          ListModel.instance = this;
+          Backbone.Model.apply(ListModel.instance, arguments);
+        }
+        return ListModel.instance;
+      },
       initialize: function() {
         if (this.get("use_mock")) {
           var mock = this.get("mock_list");
@@ -34,7 +40,7 @@ define(
           });
         }
         _.bindAll(this, "getLength", "shuffle");
-        this.parent = PopupModel().getInstance();
+        this.parent = new PopupModel();
       },
       getLength: function() {
         var length = 0;
@@ -56,6 +62,8 @@ define(
           this.set("list", _.clone(this.get("list_default")));//XXX:fixme
         }
       }
-    }));
+    });
+
+    return ListModel;
   }
 );

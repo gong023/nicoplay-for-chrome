@@ -2,33 +2,24 @@ define(
   ["jquery", "underscore", "backbone"],
   function($, _, Backbone) {
 
-    var instance = false;
-
-    var PopupModel = function() {
-      var obj = Backbone.Model.extend({
-        defaults: {
-          "view": "list",
-          "playing_index": 0,
-          "is_shuffle": false,
-          "domain": "http://gong023.com/nicoplay/public/audio/all/"
-        },
-        getBkAudio: function() {
-          return chrome.extension.getBackgroundPage().$("#bkAudio")[0];
+    var PopupModel = Backbone.Model.extend({
+      defaults: {
+        "view": "list",
+        "playing_index": 0,
+        "is_shuffle": false,
+        "domain": "http://gong023.com/nicoplay/public/audio/all/"
+      },
+      constructor: function() {
+        if (! PopupModel.instance) {
+          PopupModel.instance = this;
+          Backbone.Model.apply(PopupModel.instance, arguments);
         }
-      });
-
-      return {
-        getObj: function() {
-          return obj;
-        },
-        getInstance: function() {
-          if (! instance) {
-            instance = new obj();
-          }
-          return instance;
-        }
+        return PopupModel.instance;
+      },
+      getBkAudio: function() {
+        return chrome.extension.getBackgroundPage().$("#bkAudio")[0];
       }
-    }
+    });
 
     return PopupModel;
   }
