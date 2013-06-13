@@ -1,6 +1,9 @@
 define(
-  ["views/popup", "models/popup", "models/popup/control"],
-  function(PopupView, PopupModel, ControlModel) {
+  [
+    "frontend/views/popup",
+    "frontend/models/popup/control"
+  ],
+  function(PopupView, ControlModel) {
 
     var ControlView = Backbone.View.extend({
       model: new ControlModel(),

@@ -1,16 +1,19 @@
 require.config({
-  baseUrl: "../js/app/frontend",
   paths: {
-    jquery: "../../libs/jquery/jquery-min",
-    underscore: "../../libs/underscore/underscore-min",
-    backbone: "../../libs/backbone/backbone-min",
-    jquery_mockjax: "../../libs/jquery/jquery.mockjax"
+    jquery: "../libs/jquery/jquery-min",
+    underscore: "../libs/underscore/underscore-min",
+    backbone: "../libs/backbone/backbone-min",
+    jquery_mockjax: "../libs/jquery/jquery.mockjax"
   }
 });
 
 require(
-  ["jquery", "underscore", "backbone",
-    "views/popup", "views/popup/playlist", "views/popup/control"],
+  [
+    "jquery", "underscore", "backbone",
+    "frontend/views/popup",
+    "frontend/views/popup/playlist",
+   "frontend/views/popup/control"
+  ],
   function($, _, Backbone, PopupView, ListView, ControlView) {
     var popup_view = new PopupView();
     var list_view = new ListView();

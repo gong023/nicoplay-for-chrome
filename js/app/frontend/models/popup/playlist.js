@@ -1,5 +1,5 @@
 define(
-  ["models/popup", "jquery_mockjax"],
+  ["frontend/models/popup", "jquery_mockjax"],
   function(PopupModel) {
 
     var ListModel = Backbone.Model.extend({

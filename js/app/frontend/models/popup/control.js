@@ -1,5 +1,5 @@
 define(
-  ["models/popup", "models/popup/playlist"],
+  ["frontend/models/popup", "frontend/models/popup/playlist"],
   function(PopupModel, ListModel) {
 
     var ControlModel = Backbone.Model.extend({

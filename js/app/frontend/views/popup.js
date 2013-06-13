@@ -1,5 +1,5 @@
 define(
-  ["jquery", "underscore", "backbone", "models/popup"],
+  ["jquery", "underscore", "backbone", "frontend/models/popup"],
   function($, _, Backbone, PopupModel) {
 
     var PopupView = Backbone.View.extend({
@@ -15,19 +15,15 @@ define(
         }
       },
       switchView: function() {
-        switch (this.model.get("view")) {
-          case "list":
-            $("#control").hide("fast");
-            $("#playlist").show("fast");
-            break;
-          case "control":
-            $("#control").show("fast");
-            $("#playlist").hide("fast");
-            break;
-          default:
-            console.warn("unknown view");
-            break;
+        try {
+          var ret = this.model.switchView();
+        } catch (e) {
+          $("#control").hide("fast");
+          $("#playlist").show("fast");
         }
+        var hide = ret[0], show = ret[1], speed = ret[2];
+        $("#" + hide).hide(speed);
+        $("#" + show).show(speed);
       }
     });
 

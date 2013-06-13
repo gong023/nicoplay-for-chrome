@@ -18,6 +18,24 @@ define(
       },
       getBkAudio: function() {
         return chrome.extension.getBackgroundPage().$("#bkAudio")[0];
+      },
+      switchView: function() {
+        switch (this.get("view")) {
+          case "list":
+            var hide = "control";
+            var show = "playlist";
+            break;
+          case "control":
+            var hide = "playlist";
+            var show = "control";
+            break;
+          default:
+            throw "unknown view";
+            break;
+        }
+        var speed = "fast";
+
+        return [hide, show, speed];
       }
     });
 
