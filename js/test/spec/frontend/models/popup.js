@@ -7,16 +7,24 @@ define(
         popup = new PopupModel();
       });
 
+      afterEach(function() {
+        listModel = null;
+      });
+
       it("should be singleton", function() {
         var popupCompare = new PopupModel();
         expect(popup).toBe(popupCompare);
       });
     });
 
-    describe("PopupModel.switchView", function() {
+    describe("PopupModel.switchView()", function() {
       var popup = null;
       beforeEach(function() {
         popup = new PopupModel();
+      });
+
+      afterEach(function() {
+        listModel = null;
       });
 
       it("should hide control when view is list", function() {

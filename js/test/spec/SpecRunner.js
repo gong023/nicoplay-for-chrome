@@ -10,9 +10,9 @@ require.config({
 
 require(
   [
-    '../test/spec/frontend/popup',
-    '../test/spec/frontend/popup/control',
-    '../test/spec/frontend/popup/playlist'
+    '../test/spec/frontend/models/popup',
+    '../test/spec/frontend/models/popup/control',
+    '../test/spec/frontend/models/popup/playlist'
   ],
   function() {
   }

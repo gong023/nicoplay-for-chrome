@@ -14,8 +14,7 @@ define(
         var index = this.parent.get("playing_index");
         var list = this.listModel.get("list");
         if (! list) {
-          alert('there is no list.');
-          return;
+          throw "there is no list";
         }
         var listLength = this.listModel.getLength();
 
