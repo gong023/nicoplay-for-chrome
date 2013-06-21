@@ -3,24 +3,21 @@ define(
   function(PopupModel) {
 
     var ListModel = Backbone.Model.extend({
-      url: 'http://gong023.com/list',
+      url: "http://ec2-50-16-95-225.compute-1.amazonaws.com:3000/api/menus",
       defaults: {
-        use_mock: true,
+        use_mock: false,
         mock: {
           0: {
-            "ctime": "2013-04-04",
-            "title": "MAD 這いよれ!カーズさんW-故意はカーズの隷也-",
-            "video_id": "sm20517586"
+            "title": "「愛ト茄子ト平和ナ果実」を歌ってみた足首",
+            "path": "/resource/audio/2013-06-16/sm21128349.mp3"
           },
           1: {
-            "ctime": "2013-05-14",
-            "title": "ミサカサーキュレーション",
-            "video_id": "sm18392719"
+            "title": "【まふまふ】へたくそユートピア政策＠歌ってみた",
+            "path": "/resource/audio/2013-06-16/sm21129846.mp3"
           },
           2: {
-            "ctime": "2013-05-24",
-            "title": "夕立のりぼんを全力で歌ってみた【レミュー】",
-            "video_id": "sm20939442"
+            "title": "『not blue.』を歌ってみた【clear】",
+            "path": "/resource/audio/2013-06-17/sm21137998.mp3"
           }
         }
       },
@@ -33,10 +30,9 @@ define(
       },
       initialize: function() {
         if (this.get("use_mock")) {
-          var mock = this.get("mock_list");
           $.mockjax({
-            url: 'http://gong023.com/list',
-            responseText: mock
+            url: this.url,
+            responseText: this.get("mock")
           });
         }
         _.bindAll(this, "getLength", "shuffle");

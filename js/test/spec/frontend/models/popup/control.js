@@ -13,7 +13,7 @@ define(
       });
 
       afterEach(function() {
-        listModel = null;
+        controlModel = null;
       });
 
       it("should post message to background page", function() {
@@ -34,7 +34,7 @@ define(
         expect(controlModel.parent.get("playing_index")).toBe(0);
       });
 
-      it("should set index 2 when index is less than 0", function() {
+      it("should set index max when index is less than 0", function() {
         controlModel.parent.set("playing_index", -1);
         expect(controlModel.play).not.toThrow();
         expect(controlModel.port.postMessage).toHaveBeenCalled();
@@ -50,7 +50,7 @@ define(
       });
 
       afterEach(function() {
-        listModel = null;
+        controlModel = null;
       });
 
       it("should post Message to background", function() {

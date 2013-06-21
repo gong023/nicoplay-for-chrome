@@ -7,7 +7,7 @@ define(
         "view": "list",
         "playing_index": 0,
         "is_shuffle": false,
-        "domain": "http://gong023.com/nicoplay/public/audio/all/"
+        "domain": "http://ec2-50-16-95-225.compute-1.amazonaws.com"
       },
       constructor: function() {
         if (! PopupModel.instance) {

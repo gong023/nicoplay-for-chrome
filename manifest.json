@@ -15,7 +15,7 @@
   "content_security_policy":
     "script-src 'self' 'unsafe-eval' https://ajax.cdnjs.com/ https://ajax.googleapis.com/; object-src 'self'",
   "permissions": [
-    "http://gong023.com/"
+    "http://ec2-50-16-95-225.compute-1.amazonaws.com/"
   ],
   "options_page": "js/test/index.html"
 }

@@ -26,7 +26,7 @@ define(
         this.parent.set({"playing_index": index}, {silent: true});
 
         var selected = list[index];
-        var src = this.parent.get("domain") + selected.ctime + "/" + selected.video_id + ".mp3";
+        var src = this.parent.get("domain") + selected.path;
         //src = 'http://taira-komori.jpn.org/sound/game01/Surprise.mp3';
         //src = 'http://taira-komori.jpn.org/sound/game01/button01a.mp3';
         this.port.postMessage(["play", src]);

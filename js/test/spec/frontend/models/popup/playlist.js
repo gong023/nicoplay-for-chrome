@@ -28,7 +28,7 @@ define(
         listModel = null;
       });
 
-      it("should be set list buy xhr", function() {
+      it("should be set list by xhr", function() {
         listModel.fetch({
           success: $.proxy(function(data) {
             listModel.set("list", data.attributes.mock);
@@ -56,9 +56,9 @@ define(
         listModel = null;
       });
 
-      it("should be return length of list", function() {
+      it("should return length of list", function() {
         var ret = listModel.getLength();
-        expect(ret).toBe(3);
+        expect(ret).toBe(3); // given by mock
       });
     });
 

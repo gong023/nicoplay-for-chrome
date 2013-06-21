@@ -8,7 +8,7 @@ define(
       });
 
       afterEach(function() {
-        listModel = null;
+        popup = null;
       });
 
       it("should be singleton", function() {
@@ -24,7 +24,7 @@ define(
       });
 
       afterEach(function() {
-        listModel = null;
+        popup = null;
       });
 
       it("should hide control when view is list", function() {
