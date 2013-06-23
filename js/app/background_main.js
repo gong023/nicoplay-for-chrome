@@ -1,15 +1,16 @@
 require.config({
-  baseUrl: "../js/app/background",
   paths: {
-    jquery: "../../libs/jquery/jquery-min",
-    underscore: "../../libs/underscore/underscore-min",
-    backbone: "../../libs/backbone/backbone-min"
+    jquery: "../libs/jquery/jquery-min",
+    underscore: "../libs/underscore/underscore-min",
+    backbone: "../libs/backbone/backbone-min",
+    jquery_mockjax: '../libs/jquery/jquery.mockjax'
   }
 });
 
 require(
-  ["models/audio"],
-  function(AudioModel) {
+  ["background/models/audio", "background/models/list"],
+  function(AudioModel, ListModel) {
+    new ListModel();
     chrome.extension.onConnect.addListener(function(port) {
       port.onMessage.addListener(function(req) {
         var method = _.first(req);

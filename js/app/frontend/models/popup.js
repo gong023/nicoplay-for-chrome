@@ -19,6 +19,13 @@ define(
       getBkAudio: function() {
         return chrome.extension.getBackgroundPage().$("#bkAudio")[0];
       },
+      getBkList: function() {
+        var bkList = chrome.extension.getBackgroundPage().$("#bkList")[0].value;
+        if (! bkList) {
+          throw "there is no list";
+        }
+        return JSON.parse(bkList);
+      },
       switchView: function() {
         switch (this.get("view")) {
           case "list":

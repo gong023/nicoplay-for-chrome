@@ -12,7 +12,9 @@ require(
   [
     '../test/spec/frontend/models/popup',
     '../test/spec/frontend/models/popup/control',
-    '../test/spec/frontend/models/popup/playlist'
+//    '../test/spec/frontend/models/popup/playlist',
+    '../test/spec/background/models/audio',
+    '../test/spec/background/models/list'
   ],
   function() {
   }

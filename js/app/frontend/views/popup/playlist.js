@@ -1,35 +1,21 @@
 define(
   [
-    "frontend/views/popup",
-    "frontend/models/popup/playlist"
+    "frontend/views/popup"
   ],
-  function(PopupView, ListModel) {
+  function(PopupView) {
 
     var ListView = Backbone.View.extend({
-      model: new ListModel(),
       el: $('#playlist'),
       initialize: function() {
         _.bindAll(this, "render", "showControl");
         this.parent = new PopupView();
-        this.parent.model.on("change:is_shuffle", this.model.shuffle);
       },
       events: {
         "click .select": "showControl"
       },
       render: function() {
-        this.model.fetch({
-          success: $.proxy(function(model) {
-            var list = (this.model.get("use_mock")) ? model.attributes.mock : model.toJSON();
-            $(this.el).html(_.template($("#list").html(), {list: list}));
-
-            this.model.set('list', list);
-            this.model.set("list_default", _.clone(list));
-          }, this),
-          error: $.proxy(function(error) {
-            alert("failed to get resource.");
-            console.warn(error);
-          }, this)
-        });
+        var list = this.parent.model.getBkList();
+        $(this.el).html(_.template($("#list").html(), {list: list}));
       },
       showControl: function(ev) {
         this.parent.model.set("view", "control");
