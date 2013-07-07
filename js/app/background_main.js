@@ -10,26 +10,30 @@ require.config({
 require(
   ["background/models/audio", "background/models/list"],
   function(AudioModel, ListModel) {
-    new ListModel();
     chrome.extension.onConnect.addListener(function(port) {
       port.onMessage.addListener(function(req) {
-        var method = _.first(req);
-        var args = _.rest(req);
-        var model = AudioModel;
+        var method = _.first(_.values(req));
+        var args = _.rest(_.values(req));
+        var audio = AudioModel;
+        var list = new ListModel();
+        console.log(list);
 
         switch(method) {
           case 'play':
-            model.set({'src': _.first(args)}, {validate: true});
+            audio.set({'src': _.first(args)}, {validate: true});
             break;
           case 'togglePlay':
-            model.togglePlay();
+            audio.togglePlay();
             break;
           case 'isPaused':
-            port.postMessage(["isPaused", model.isPaused()]);
-          break;
+            port.postMessage(["isPaused", audio.isPaused()]);
+            break;
+          case 'setPlayingIndex':
+            list.set("playing_index", args[0]);
+            break;
           default:
             console.warn("unknown message.");
-          break;
+            break;
         }
       })
     });

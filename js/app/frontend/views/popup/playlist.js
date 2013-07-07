@@ -1,14 +1,16 @@
 define(
   [
-    "frontend/views/popup"
+    "frontend/views/popup",
+    "frontend/models/connect"
   ],
-  function(PopupView) {
+  function(PopupView, ConnectModel) {
 
     var ListView = Backbone.View.extend({
       el: $('#playlist'),
       initialize: function() {
         _.bindAll(this, "render", "showControl");
         this.parent = new PopupView();
+        this.connect = new ConnectModel();
       },
       events: {
         "click .select": "showControl"
@@ -19,7 +21,7 @@ define(
       },
       showControl: function(ev) {
         this.parent.model.set("view", "control");
-        this.parent.model.set({"playing_index": $(ev.target).val()});
+        this.connect.post("setPlayingIndex", $(ev.target).val());
       }
     });
 

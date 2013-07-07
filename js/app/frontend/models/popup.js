@@ -5,7 +5,6 @@ define(
     var PopupModel = Backbone.Model.extend({
       defaults: {
         "view": "list",
-        "playing_index": 0,
         "is_shuffle": false,
         "domain": "http://ec2-50-16-95-225.compute-1.amazonaws.com"
       },
@@ -25,6 +24,9 @@ define(
           throw "there is no list";
         }
         return JSON.parse(bkList);
+      },
+      getBkIndex: function() {
+        return chrome.extension.getBackgroundPage().$("#bkIndex")[0].innerHTML;
       },
       switchView: function() {
         switch (this.get("view")) {

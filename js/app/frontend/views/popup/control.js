@@ -1,24 +1,22 @@
 define(
   [
     "frontend/views/popup",
-    "frontend/models/popup/control"
+    "frontend/models/connect"
   ],
-  function(PopupView, ControlModel) {
+  function(PopupView, ConnectModel) {
 
     var ControlView = Backbone.View.extend({
-      model: new ControlModel(),
       el: $("#control"),
       initialize: function() {
         _.bindAll(this, "doBack", "doPlay", "doNext",
-                  "doPrev", "doShuffle", "onPlay", "onPause", "onEnded");
+                  "doPrev", "doShuffle", "onPlay", "onPause");
 
         this.parent = new PopupView();
-        this.parent.model.on("change:playing_index", this.model.play);
+        this.connect = new ConnectModel();
 
         var bkAudio = this.parent.model.getBkAudio();
         $(bkAudio).on("play", this.onPlay);
         $(bkAudio).on("pause", this.onPause);
-        $(bkAudio).on("ended", this.onEnded);
       },
       events: {
         "click #back": "doBack",
@@ -33,15 +31,15 @@ define(
         this.parent.model.set("view", "list");
       },
       doPlay: function() {
-        this.model.togglePlay();
+        this.connect.post("togglePlay");
       },
       doNext: function() {
-        var index = parseInt(this.parent.model.get("playing_index")) + 1;
-        this.parent.model.set("playing_index", index)
+        var index = +(this.parent.model.getBkIndex()) + 1;
+        this.connect.post("setPlayingIndex", index);
       },
       doPrev: function() {
-        var index = parseInt(this.parent.model.get("playing_index")) - 1;
-        this.parent.model.set("playing_index", index)
+        var index = +(this.parent.model.getBkIndex()) - 1;
+        this.connect.post("setPlayingIndex", index);
       },
       doShuffle: function() {
         var is = ! this.parent.model.get("is_shuffle");
@@ -54,10 +52,6 @@ define(
       },
       onPause: function() {
         $(this.el).html(_.template($("#parts").html(), {togglePlay: "play"}));
-      },
-      onEnded: function() {
-        var index = parseInt(this.parent.model.get("playing_index")) + 1;
-        this.parent.model.set("playing_index", index)
       }
     });
 

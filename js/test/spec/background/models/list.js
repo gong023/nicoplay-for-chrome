@@ -13,11 +13,19 @@ define(
       });
 
       xit("should be set list by xhr in initialize", function() {
-        var ret = list.get("list");
-        waitsFor(function() {
-          return list.setList.callCount > 0;
+        fetch_callback = jasmine.createSpy("fetch_callback");
+        jasmine.Clock.useMock();
+        jasmine.Clock.useMock();
+        list.fetch({
+          success: function() {
+            fetch_callback();
+          },
+          error: function() {
+          }
         });
-        expect((ret)).toBe(true);
+
+        jasmine.Clock.tick(5);
+        expect(fetch_callback).toHaveBeenCalled();
       });
 
     });
@@ -63,11 +71,5 @@ define(
         expect(list.get("list")).toEqual(origin);
       });
     });
-
-    var sleep = function(second) {
-      var d1 = new Date().getTime(); var d2 = new Date().getTime();
-      while (d2 < d1 + 1000 * second) d2 = new Date().getTime();
-      return;
-    }
   }
 );
