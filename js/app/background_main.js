@@ -14,9 +14,8 @@ require(
       port.onMessage.addListener(function(req) {
         var method = _.first(_.values(req));
         var args = _.rest(_.values(req));
-        var audio = AudioModel;
+        var audio = new AudioModel();
         var list = new ListModel();
-        console.log(list);
 
         switch(method) {
           case 'play':

@@ -8,10 +8,11 @@ define(
         this.model.on("change:view", this.switchView, this);
       },
       render: function() {
-        if (this.model.getBkAudio().paused) {
-          $("#control").hide();
-        } else {
+        var bk_audio = this.model.getBkAudio();
+        if (bk_audio && bk_audio.paused) {
           $("#playlist").hide();
+        } else {
+          $("#control").hide();
         }
       },
       switchView: function() {

@@ -1,31 +1,22 @@
 define(
   ['background/models/list'],
   function(ListModel) {
+
     describe("Background ListModel", function() {
-      var list = null;
-      beforeEach(function() {
-        list = new ListModel();
-      });
 
       it("should be singleton", function() {
+        var list = new ListModel();
         var listCompare = new ListModel();
         expect(list).toBe(listCompare);
       });
 
-      xit("should be set list by xhr in initialize", function() {
-        fetch_callback = jasmine.createSpy("fetch_callback");
-        jasmine.Clock.useMock();
-        jasmine.Clock.useMock();
-        list.fetch({
-          success: function() {
-            fetch_callback();
-          },
-          error: function() {
-          }
-        });
-
-        jasmine.Clock.tick(5);
-        expect(fetch_callback).toHaveBeenCalled();
+      it("should be set list by xhr in initialize", function() {
+        var list = new ListModel();
+        ugly_sleep();
+        //expect(list.get("list").length).toBeGreaterThan(1);
+        console.log('aaa');
+        console.log(list.get("list"));
+        //expect(list.get("list_default").length).toBeGreaterThan(1);
       });
 
     });
@@ -34,12 +25,13 @@ define(
       var list = null;
       beforeEach(function() {
         list = new ListModel();
-        list.set("list", list.get("mock"));
+        list.set("list", list.xhr.get("mock"));
+        list.set("list_default", list.xhr.get("mock"));
       });
 
       it("should return length of list", function() {
         var ret = list.getLength();
-        expect(ret).toBe(3); // given by mock
+        expect(ret).toBe(3); // 3 is mock length.
       });
     });
 
@@ -47,12 +39,12 @@ define(
       var list = null;
       beforeEach(function() {
         list = new ListModel();
-        list.set("list", list.get("mock"));
+        list.set("list", list.xhr.get("mock"));
       });
 
       it("should shuffle list when flag is on", function() {
         list.set("is_shuffle", true);
-        var origin = _.clone(list.get("list"));
+        var origin = _.clone(list.get("mock"));
         list.shuffle();
         var i = 10;
         while(i--) {
@@ -65,11 +57,19 @@ define(
 
       it("should redo shuffle list when flag is off", function() {
         list.set("is_shuffle", false);
-        list.set("list_default", list.get("list"));
         var origin = _.clone(list.get("list"));
         list.shuffle();
         expect(list.get("list")).toEqual(origin);
       });
     });
+
+    var ugly_sleep = function() {
+      var timeStart = new Date().getTime();
+      var timeNow = new Date().getTime();
+      while(timeNow < (timeStart + 10000)) {
+        timeNow = new Date().getTime();
+      }
+      return;
+    }
   }
 );

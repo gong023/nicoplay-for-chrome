@@ -6,10 +6,19 @@ define(
   function($, _, Backbone, ListModel) {
 
     // singleton
-    return  new (Backbone.Model.extend({
-      listModel: new ListModel(),
+    var AudioModel = Backbone.Model.extend({
+      constructor: function() {
+        if (! AudioModel.instance) {
+          AudioModel.instance = this;
+          Backbone.Model.apply(AudioModel.instance, arguments);
+        }
+        return AudioModel.instance;
+      },
       initialize: function() {
-        _.bindAll(this, "validate", "playOnSrc", "setSrcOnPlayingIndex", "togglePlay", "onEnded");
+        _.bindAll(this, "validate", "validate_error",
+                  "playOnSrc", "setSrcOnPlayingIndex", "togglePlay", "onEnded");
+
+        this.listModel = new ListModel();
 
         var audio = new Audio();
         audio.setAttribute('id', 'bkAudio');
@@ -21,25 +30,28 @@ define(
 
         this.listModel.on("change:playing_index", this.setSrcOnPlayingIndex);
         this.on("change:src", this.playOnSrc);
-        this.on("invalid", function(model, error) {
-          console.warn('[validate error] ' + error);
-        });
+        this.on("error", this.validate_error);
       },
       validate: function(attrs) {
         var errs = [];
-        if (_.has(attrs, "src") && attrs.src.length == 0) {
+        if (_.has(attrs, "src") && ! attrs.src) {
           errs.push('audio src is empty');
         }
         if (errs.length > 0) return errs;
       },
+      validate_error: function(model, error) {
+        console.warn('[validate error] ' + error);
+      },
       playOnSrc: function() {
         var audio = this.get("audio");
-        audio.src = this.get("src");
+        var src = this.get("src");
+        audio.src = src;
         audio.play();
       },
       setSrcOnPlayingIndex: function() {
         var index = this.listModel.get("playing_index");
         var list = this.listModel.get("list");
+        console.log(list);
         if (! list) {
           throw "there is no list";
         }
@@ -64,6 +76,8 @@ define(
         var index = +(this.listModel.get("playing_index")) + 1;
         this.listModel.set("playing_index", index);
       }
-    }));
+    });
+
+    return AudioModel;
   }
 );
