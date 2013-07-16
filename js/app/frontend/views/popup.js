@@ -10,9 +10,9 @@ define(
       render: function() {
         var bk_audio = this.model.getBkAudio();
         if (bk_audio && bk_audio.paused) {
-          $("#playlist").hide();
+          $("#playlist").show();
         } else {
-          $("#control").hide();
+          $("#control").show();
         }
       },
       switchView: function() {

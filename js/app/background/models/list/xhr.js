@@ -5,6 +5,7 @@ define(
       url: "http://ec2-50-16-95-225.compute-1.amazonaws.com:3000/api/menus.json",
       defaults: {
         use_mock: false,
+        loaded: false,
         mock: {
           0: {
             "title": "「愛ト茄子ト平和ナ果実」を歌ってみた足首",
@@ -38,6 +39,7 @@ define(
             this.set("list_default", _.clone(list));
             $("#bkList").val(JSON.stringify(this.get("list")));
             $("#bkListDefault").val(JSON.stringify(this.get("list_default")));
+            this.set("loaded", true);
           }, this),
           error: $.proxy(function(error) {
             console.warn(error);

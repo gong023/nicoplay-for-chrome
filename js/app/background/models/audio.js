@@ -49,12 +49,10 @@ define(
         audio.play();
       },
       setSrcOnPlayingIndex: function() {
-        var index = this.listModel.get("playing_index");
         var list = this.listModel.get("list");
-        console.log(list);
-        if (! list) {
-          throw "there is no list";
-        }
+        if (! list) throw("there is no list");
+
+        var index = this.listModel.get("playing_index");
         var listLength = this.listModel.getLength();
 
         if (index < 0) {

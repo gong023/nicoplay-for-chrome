@@ -3,7 +3,6 @@ define(
   function($, _, Backbone, XhrModel) {
     var ListModel = Backbone.Model.extend({
       url: "http://ec2-50-16-95-225.compute-1.amazonaws.com:3000/api/menus.json",
-      xhr: new XhrModel(),
       defaults: {
         playing_index: 0,
         is_shuffle: false
@@ -16,8 +15,13 @@ define(
         return ListModel.instance;
       },
       initialize: function() {
-        _.bindAll(this, "getLength", "shuffle");
+        _.bindAll(this, "onLoaded", "getLength", "shuffle");
+
+        this.xhr = new XhrModel();
         this.xhr.setList();
+        this.xhr.on("change:loaded", this.onLoaded);
+      },
+      onLoaded: function() {
         this.set("list", _.clone(this.xhr.get("list")));
         this.set("list_default", _.clone(this.xhr.get("list_default")));
       },

@@ -10,12 +10,12 @@ require.config({
 require(
   ["background/models/audio", "background/models/list"],
   function(AudioModel, ListModel) {
+    var audio = new AudioModel();
+    var list = new ListModel();
     chrome.extension.onConnect.addListener(function(port) {
       port.onMessage.addListener(function(req) {
         var method = _.first(_.values(req));
         var args = _.rest(_.values(req));
-        var audio = new AudioModel();
-        var list = new ListModel();
 
         switch(method) {
           case 'play':
