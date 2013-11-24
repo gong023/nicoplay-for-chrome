@@ -10,11 +10,10 @@ define(
         expect(list).toBe(listCompare);
       });
 
-      it("should be set list by xhr in initialize", function() {
+      xit("should be set list by xhr in initialize", function() {
         var list = new ListModel();
         ugly_sleep();
         //expect(list.get("list").length).toBeGreaterThan(1);
-        console.log('aaa');
         console.log(list.get("list"));
         //expect(list.get("list_default").length).toBeGreaterThan(1);
       });
@@ -62,14 +61,5 @@ define(
         expect(list.get("list")).toEqual(origin);
       });
     });
-
-    var ugly_sleep = function() {
-      var timeStart = new Date().getTime();
-      var timeNow = new Date().getTime();
-      while(timeNow < (timeStart + 10000)) {
-        timeNow = new Date().getTime();
-      }
-      return;
-    }
   }
 );

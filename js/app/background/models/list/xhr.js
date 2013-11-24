@@ -2,7 +2,7 @@ define(
   ["jquery", "underscore", "backbone", "jquery_mockjax"],
   function($, _, Backbone) {
     var XhrModel = Backbone.Model.extend({
-      url: "http://ec2-50-16-95-225.compute-1.amazonaws.com:3000/api/menus.json",
+      url: "http://niconicomedia.net:3000/histories.json",
       defaults: {
         use_mock: false,
         loaded: false,
