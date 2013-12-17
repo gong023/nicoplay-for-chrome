@@ -12,7 +12,6 @@ define(
 
       xit("should be set list by xhr in initialize", function() {
         var list = new ListModel();
-        ugly_sleep();
         //expect(list.get("list").length).toBeGreaterThan(1);
         console.log(list.get("list"));
         //expect(list.get("list_default").length).toBeGreaterThan(1);

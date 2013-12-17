@@ -62,8 +62,7 @@ define(
         }
         this.listModel.set({"playing_index": index}, {silent: true});
 
-        var src = "http://ec2-50-16-95-225.compute-1.amazonaws.com" + list[index].path;
-        this.set("src", src);
+        this.set("src", list[index].path);
         $("#bkIndex")[0].innerHTML = index;
       },
       togglePlay: function() {
