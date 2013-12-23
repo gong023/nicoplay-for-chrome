@@ -8,7 +8,7 @@ require.config({
 });
 
 require(
-  ["background/models/audio", "background/models/list"],
+  ["background/models/legacy/audio", "background/models/legacy/list"],
   function(AudioModel, ListModel) {
     var audio = new AudioModel();
     var list = new ListModel();

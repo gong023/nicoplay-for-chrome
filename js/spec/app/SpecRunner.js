@@ -3,17 +3,16 @@ require.config({
   paths: {
     jquery: '../libs/jquery/jquery-min',
     underscore: '../libs/underscore/underscore-min',
-    backbone: '../libs/backbone/backbone-min',
-    jquery_mockjax: '../libs/jquery/jquery.mockjax'
+    backbone: '../libs/backbone/backbone-min'
   }
 });
 
 require(
   [
-//    '../test/spec/frontend/models/popup',
-//    '../test/spec/background/models/audio',
-//    '../test/spec/background/models/list',
-    '../test/spec/background/models/list/xhr'
+//    '../spec/app/frontend/models/popup',
+//    '../spec/app/background/models/audio',
+//    '../spec/app/background/models/list',
+    '../spec/app/background/models/history_spec'
   ],
   function() {
   }

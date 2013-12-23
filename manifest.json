@@ -17,5 +17,5 @@
   "permissions": [
     "http://niconicomedia.net/"
   ],
-  "options_page": "js/test/SpecRunner.html"
+  "options_page": "js/spec/SpecRunner.html"
 }
