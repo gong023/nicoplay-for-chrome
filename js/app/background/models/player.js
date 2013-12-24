@@ -1,7 +1,7 @@
 define(
     [
         "jquery", "underscore", "backbone",
-        "background/collections/audiolist"
+        "background/collections/audiolist",
         "background/models/audio"
     ],
     function($, _, Backbone, AudioCollection, Audio) {
