@@ -16,8 +16,10 @@ define(
         "click .select": "showControl"
       },
       render: function() {
-        var list = this.parent.model.getBkList();
-        $(this.el).html(_.template($("#list").html(), {list: list}));
+        console.log('aaaaaaaaaaaaa');
+        var list = this.connect.post('getBkList');
+        console.log(list);
+        $(this.el).html(_.template($("#list").html(), { list: list }));
       },
       showControl: function(ev) {
         try {

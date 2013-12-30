@@ -5,8 +5,7 @@ define(
     var PopupModel = Backbone.Model.extend({
       defaults: {
         "view": "list",
-        "is_shuffle": false,
-        "domain": "http://ec2-50-16-95-225.compute-1.amazonaws.com"
+        "is_shuffle": false
       },
       constructor: function() {
         if (! PopupModel.instance) {
@@ -18,13 +17,14 @@ define(
       getBkAudio: function() {
         return chrome.extension.getBackgroundPage().$("#bkAudio")[0];
       },
-      getBkList: function() {
-        var bkList = chrome.extension.getBackgroundPage().$("#bkList")[0].value;
-        if (! bkList) {
-          throw "there is no list";
-        }
-        return JSON.parse(bkList);
-      },
+//      getBkList: function() {
+//        var bkList = chrome.extension.getBackgroundPage().$("#bkList")[0].value;
+//        var bkList = this.connect.post('getBkList');
+//        if (! bkList) {
+//          throw "there is no list";
+//        }
+//        return JSON.parse(bkList);
+//      },
       getBkIndex: function() {
         return chrome.extension.getBackgroundPage().$("#bkIndex")[0].innerHTML;
       },

@@ -2,24 +2,24 @@ define(
   ['background/models/history'],
   function(HistoryModel) {
     describe('HistoryModel', function() {
-      describe('#fetch', function() {
-        var history = null;
+      describe('#initialize', function() {
         var flg = false;
-
-        beforeEach(function() { history = new HistoryModel(); });
         afterEach(function() { flg = false; });
 
-        it('has list with 20 items', function() {
-          history.fetch({ success: $.proxy(function() { flg = true }, this)});
+        describe('success', function() {
+           it('fetch list with 20 items', function() {
+             history = new HistoryModel();
+             setTimeout(function() { flg = true }, 1000);
 
-          waitsFor(function() { return flg; }, 'fetch within 1 sec', 1000);
+             waitsFor(function() { return flg; }, 'fetch within 1sec');
 
-          runs(function() {
-            expect(history.get('list')).not.toBeUndefined();
-            expect(history.get('list').length).toBe(20);
-          });
+             runs(function() {
+               expect(history.get('list')).not.toBeUndefined();
+               expect(history.get('list').length).toBe(20);
+             });
+           });
         });
-      })
+      });
     });
   }
 );

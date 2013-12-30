@@ -15,9 +15,9 @@ require.config({
 
 require(
   [
-//    '../spec/app/frontend/models/popup',
-//    '../spec/app/background/models/audio',
-//    '../spec/app/background/models/list',
+    '../spec/app/frontend/models/connect_spec',
+    '../spec/app/background/collections/historylist_spec',
+    '../spec/app/background/models/player_spec',
     '../spec/app/background/models/history_spec'
   ],
   function() {

@@ -1,8 +1,13 @@
 define(
-    ["jquery", "underscore", "backbone"],
-    function($, _, Backbone) {
-        var AudioCollection = Backbone.Collection({});
+    [
+      'jquery', 'underscore', 'backbone',
+      'background/models/history'
+    ],
+    function($, _, Backbone, History) {
+        var HistoryCollection = Backbone.Collection.extend({
+          model: History
+        });
 
-        return new AudioCollection();
+        return HistoryCollection;
     }
 );

@@ -1,26 +1,29 @@
 define(
-    [
-        "jquery", "underscore", "backbone",
-        "background/collections/audiolist",
-        "background/models/audio"
-    ],
-    function($, _, Backbone, AudioCollection, Audio) {
-        var player = Backbone.Model.extend({
-            defaults{
-                playing_index: 0,
-                page_index: 0
-            },
-            initialize: function() {
-                _.bindAll(this, onPlayingIndex, onPageIndex);
-            },
-            onPlayingIndex: function() {
-                //次の曲を再生する
-            },
-            onPageIndex: function() {
-                //collectionにaddする
-            }
-        });
+  [
+    "jquery", "underscore", "backbone",
+    "background/collections/historylist"
+  ],
+  function($, _, Backbone, HistoryCollection) {
+    var PlayerModel = Backbone.Model.extend({
+      defaults: {
+        playing_index: 0,
+        page_index: 0
+      },
+      initialize: function() {
+        this.set('collection', new HistoryCollection());
+        this.get('collection').add();
+      },
+      getPlayList: function() {
+        return this.get('collection').at(0).get('list');
+      },
+      onPlayingIndex: function() {
+        //次の曲を再生するとか
+      },
+      onPageIndex: function() {
+        //collectionにaddするとか
+      }
+    });
 
-        return player;
-    }
+    return PlayerModel;
+  }
 );

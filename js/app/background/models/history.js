@@ -4,8 +4,8 @@ define(
     var HistoryModel = Backbone.Model.extend({
       url: 'http://niconicomedia.net:3000/histories',
       initialize: function() {
-//        h = { success: $.proxy(this.fetchSuccess, this), error: $.proxy(this.fetchError, this) }
-//        this.fetch(h);
+        h = { success: $.proxy(this.fetchSuccess, this), error: $.proxy(this.fetchError, this) }
+        this.fetch(h);
       },
       fetchSuccess: function(model, response) {
         // todo
