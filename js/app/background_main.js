@@ -8,14 +8,13 @@ require.config({
 });
 
 require(
-  ["background/models/player"],
-  function(PlayerModel) {
-//    var audio = new AudioModel();
-//    var list = new ListModel();
-    var player = new PlayerModel();
-    this.port = chrome.extension.connect();
+  ["background/views/player"],
+  function(PlayerView) {
+    var player = new PlayerView();
 
+    var saved_port = null;
     chrome.extension.onConnect.addListener(function(port) {
+      saved_port = port;
       port.onMessage.addListener(portOnMessage);
     });
 
@@ -31,16 +30,14 @@ require(
           audio.togglePlay();
           break;
         case 'isPaused':
-          port.postMessage(["isPaused", audio.isPaused()]);
+          saved_port.postMessage(["isPaused", audio.isPaused()]);
           break;
         case 'setPlayingIndex':
           list.set("playing_index", args[0]);
           break;
         case 'getBkList':
-          list = player.getPlayList();
-          console.log('back');
-          console.log(list);
-          port.postMessage('onGetBkList', list);
+          player.render();
+          saved_port.postMessage(['onGetBkList']);
           break;
         default:
           console.warn("unknown message.");

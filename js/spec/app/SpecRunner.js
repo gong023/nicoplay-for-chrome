@@ -18,7 +18,8 @@ require(
     '../spec/app/frontend/models/connect_spec',
     '../spec/app/background/collections/historylist_spec',
     '../spec/app/background/models/player_spec',
-    '../spec/app/background/models/history_spec'
+    '../spec/app/background/models/history_spec',
+    '../spec/app/background/views/player_spec'
   ],
   function() {
   }
