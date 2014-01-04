@@ -8,9 +8,13 @@ require.config({
 });
 
 require(
-  ["background/views/player"],
-  function(PlayerView) {
+  [
+    "background/views/player",
+    "background/models/player"
+  ],
+  function(PlayerView, PlayerModel) {
     var player = new PlayerView();
+    var player_model = new PlayerModel();
 
     var saved_port = null;
     chrome.extension.onConnect.addListener(function(port) {
@@ -37,7 +41,8 @@ require(
           break;
         case 'getBkList':
           player.render();
-          saved_port.postMessage(['onGetBkList']);
+          list = player_model.getPlayList();
+          saved_port.postMessage(['onGetBkList', list]);
           break;
         default:
           console.warn("unknown message.");

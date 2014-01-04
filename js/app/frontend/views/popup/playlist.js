@@ -1,32 +1,37 @@
 define(
   [
-    "frontend/views/popup",
-    "frontend/models/connect"
+    'frontend/views/popup',
+    'frontend/models/connect',
+    'frontend/views/popup/indicator'
   ],
-  function(PopupView, ConnectModel) {
+  function(PopupView, ConnectModel, IndicatorView) {
 
     var ListView = Backbone.View.extend({
       el: $('#playlist'),
       initialize: function() {
-        _.bindAll(this, "render", "showControl");
+        _.bindAll(this, 'render', 'showControl');
         this.parent = new PopupView();
         this.connect = new ConnectModel();
+        this.indicator = new IndicatorView();
       },
       events: {
-        "click .select": "showControl"
+        'click .select': 'showControl'
       },
       render: function() {
-        var list = this.connect.post('getBkList');
-        $(this.el).html(_.template($("#list").html(), { list: list }));
+        this.connect.post('getBkList');
+        this.indicator.start();
+      },
+      showList: function(list) {
+        $(this.el).html(_.template($('#list').html(), { list: list }));
       },
       showControl: function(ev) {
         try {
-          this.connect.post("setPlayingIndex", $(ev.target).val());
+          this.connect.post('setPlayingIndex', $(ev.target).val());
         } catch(e) {
-          alert("there is no list");
+          alert('there is no list');
           return;
         }
-        this.parent.model.set("view", "control");
+        this.parent.model.set('view', 'control');
       }
     });
 

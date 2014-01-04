@@ -1,6 +1,12 @@
 define(
-  ["jquery", "underscore", "backbone"],
-  function($, _, Backbone) {
+  [
+    // View直接触りがち
+    'jquery', 'underscore', 'backbone',
+    'frontend/views/popup/indicator',
+    'frontend/views/popup/playlist'
+
+  ],
+  function($, _, Backbone, IndicatorView, ListView) {
 
     var ConnectModel = Backbone.Model.extend({
       initialize: function() {
@@ -15,6 +21,10 @@ define(
 
         switch(method) {
           case 'onGetBkList':
+            var indicator = new IndicatorView();
+            indicator.stop();
+//            console.log(args[0]);
+//            playlist.showList(args[0]);
             break;
           default:
             break;
@@ -22,9 +32,6 @@ define(
       },
       post: function() {
         this.port.postMessage(arguments);
-        playlist = chrome.extension.getBackgroundPage().$("#bkPlayList").val();
-        console.log(playlist);
-        return playlist;
       }
     });
 

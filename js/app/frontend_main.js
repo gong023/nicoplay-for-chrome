@@ -12,7 +12,7 @@ require(
     "jquery", "underscore", "backbone",
     "frontend/views/popup",
     "frontend/views/popup/playlist",
-   "frontend/views/popup/control"
+    "frontend/views/popup/control"
   ],
   function($, _, Backbone, PopupView, ListView, ControlView) {
     var popup_view = new PopupView();

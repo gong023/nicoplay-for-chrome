@@ -16,6 +16,7 @@ require.config({
 require(
   [
     '../spec/app/frontend/models/connect_spec',
+    '../spec/app/frontend/views/indicator_spec',
     '../spec/app/background/collections/historylist_spec',
     '../spec/app/background/models/player_spec',
     '../spec/app/background/models/history_spec',
