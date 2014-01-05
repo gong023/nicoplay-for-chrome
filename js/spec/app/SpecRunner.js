@@ -16,7 +16,11 @@ require.config({
 require(
   [
     '../spec/app/frontend/models/connect_spec',
+    '../spec/app/frontend/models/connect/send_spec',
+    '../spec/app/frontend/models/connect/receive_spec',
     '../spec/app/frontend/views/indicator_spec',
+    '../spec/app/frontend/views/connect_spec',
+    '../spec/app/frontend/views/popup/playlist_spec',
     '../spec/app/background/collections/historylist_spec',
     '../spec/app/background/models/player_spec',
     '../spec/app/background/models/history_spec',

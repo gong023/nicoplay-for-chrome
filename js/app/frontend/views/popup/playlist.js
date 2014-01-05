@@ -1,24 +1,24 @@
 define(
   [
+    'frontend/models/connect/send',
     'frontend/views/popup',
-    'frontend/models/connect',
     'frontend/views/popup/indicator'
   ],
-  function(PopupView, ConnectModel, IndicatorView) {
+  function(SendModel, PopupView, IndicatorView) {
 
     var ListView = Backbone.View.extend({
       el: $('#playlist'),
       initialize: function() {
-        _.bindAll(this, 'render', 'showControl');
+        _.bindAll(this, 'render', 'showList', 'showControl');
         this.parent = new PopupView();
-        this.connect = new ConnectModel();
+        this.send = new SendModel();
         this.indicator = new IndicatorView();
       },
       events: {
         'click .select': 'showControl'
       },
       render: function() {
-        this.connect.post('getBkList');
+        this.send.post('getBkList');
         this.indicator.start();
       },
       showList: function(list) {
@@ -26,7 +26,7 @@ define(
       },
       showControl: function(ev) {
         try {
-          this.connect.post('setPlayingIndex', $(ev.target).val());
+          this.send.post('setPlayingIndex', $(ev.target).val());
         } catch(e) {
           alert('there is no list');
           return;

@@ -9,14 +9,10 @@ define(
         it('set port', function() {
           expect(connect.port).not.toBeFalsy();
         });
-      });
 
-      // 実際にbackground使うかモック使うかしなければならない
-      xdescribe('#post', function() {
-        describe('getBkList', function() {
-          it('return a list', function() {
-            expect(connect.post('getBkList')).not.toBeFalsy();
-          })
+        it('be singleton', function() {
+          var connectCompare = new ConnectModel();
+          expect(connect).toBe(connectCompare);
         });
       });
     });
