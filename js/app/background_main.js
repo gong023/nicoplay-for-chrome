@@ -9,12 +9,10 @@ require.config({
 
 require(
   [
-    "background/views/player",
     "background/models/player"
   ],
-  function(PlayerView, PlayerModel) {
-    var player = new PlayerView();
-    var player_model = new PlayerModel();
+  function(PlayerModel) {
+    var player = new PlayerModel();
 
     var saved_port = null;
     chrome.extension.onConnect.addListener(function(port) {
@@ -40,8 +38,7 @@ require(
           list.set("playing_index", args[0]);
           break;
         case 'getBkList':
-          player.render();
-          list = player_model.getPlayList();
+          list = player.getPlayList();
           saved_port.postMessage(['onGetBkList', list]);
           break;
         default:
