@@ -1,0 +1,24 @@
+{
+  "name": "nicoaudio",
+  "version": "0.0.0",
+  "description": "chrome extension for listen nicovideo.jp",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gong023/nicoplay-for-chrome.git"
+  },
+  "author": "gong023",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/gong023/nicoplay-for-chrome/issues"
+  },
+  "homepage": "https://github.com/gong023/nicoplay-for-chrome",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jasmine": "~0.5.2",
+    "grunt-template-jasmine-requirejs": "~0.1.9"
+  }
+}
