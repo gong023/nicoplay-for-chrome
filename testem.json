@@ -1,0 +1,4 @@
+{
+  "test_page": "js/spec/SpecRunner.html",
+  "launch_in_dev": ["Chrome", "PhantomJS"]
+}
